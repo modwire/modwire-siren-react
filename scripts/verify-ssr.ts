@@ -22,6 +22,12 @@ class ServerImportVerifier {
     );
     assert.ok(interactions && typeof interactions === "object");
     assert.ok(Object.hasOwn(interactions, "InteractionTree"));
+
+    const extensions: unknown = await import(
+      pathToFileURL("dist/extensions.js").href
+    );
+    assert.ok(extensions && typeof extensions === "object");
+    assert.ok(Object.hasOwn(extensions, "StandardSurfacePolicy"));
   }
 }
 

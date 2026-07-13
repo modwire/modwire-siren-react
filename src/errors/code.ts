@@ -8,6 +8,11 @@ export class SirenReactCode {
   static readonly interactionIntent = "interaction.intent";
   static readonly interactionPlacement = "interaction.placement";
   static readonly interactionOrder = "interaction.order";
+  static readonly interactionMissing = "interaction.missing";
+  static readonly interactionDisabled = "interaction.disabled";
+  static readonly interactionSurface = "interaction.surface";
+  static readonly interactionTiming = "interaction.timing";
+  static readonly controllerDisposed = "controller.disposed";
   static readonly interactionDuplicate = "interaction.duplicate";
   static readonly interactionTree = "interaction.tree";
   static readonly interactionValue = "interaction.value";

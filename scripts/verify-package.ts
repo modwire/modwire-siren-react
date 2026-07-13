@@ -11,6 +11,9 @@ class PackageVerifier {
     "package/dist/interactions.d.ts",
     "package/dist/interactions.js",
     "package/dist/interactions.js.map",
+    "package/dist/extensions.d.ts",
+    "package/dist/extensions.js",
+    "package/dist/extensions.js.map",
     "package/package.json",
   ]);
 
