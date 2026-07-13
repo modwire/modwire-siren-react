@@ -1,6 +1,7 @@
 import { ViewportClass } from "../domain/vocabulary/viewport";
 import type { ViewportPort } from "../ports/viewport";
 import type { ViewportThresholds } from "./viewport-thresholds";
+import { BrowserEvent } from "./browser-event";
 
 export class BrowserViewportAdapter implements ViewportPort {
   private readonly listeners = new Set<() => void>();
@@ -29,18 +30,24 @@ export class BrowserViewportAdapter implements ViewportPort {
   };
 
   private readonly changed = (): void => {
-    for (const listener of [...this.listeners]) listener();
+    for (const listener of [...this.listeners]) {
+      try {
+        listener();
+      } catch {
+        continue;
+      }
+    }
   };
 
   private connect(): void {
     if (this.connected || typeof window === "undefined") return;
     this.connected = true;
-    window.addEventListener("resize", this.changed);
+    window.addEventListener(BrowserEvent.resize, this.changed);
   }
 
   private disconnect(): void {
     if (!this.connected || typeof window === "undefined") return;
-    window.removeEventListener("resize", this.changed);
+    window.removeEventListener(BrowserEvent.resize, this.changed);
     this.connected = false;
   }
 }

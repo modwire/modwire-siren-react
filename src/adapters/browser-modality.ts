@@ -1,5 +1,6 @@
 import { InputModality } from "../domain/vocabulary/modality";
 import type { ModalityPort } from "../ports/modality";
+import { BrowserEvent } from "./browser-event";
 
 export class BrowserModalityAdapter implements ModalityPort {
   private readonly listeners = new Set<() => void>();
@@ -33,22 +34,28 @@ export class BrowserModalityAdapter implements ModalityPort {
   private change(modality: InputModality): void {
     if (this.current === modality) return;
     this.current = modality;
-    for (const listener of [...this.listeners]) listener();
+    for (const listener of [...this.listeners]) {
+      try {
+        listener();
+      } catch {
+        continue;
+      }
+    }
   }
 
   private connect(): void {
     if (this.connected || typeof window === "undefined") return;
     this.connected = true;
-    window.addEventListener("keydown", this.keyboard, true);
-    window.addEventListener("pointerdown", this.pointer, true);
-    window.addEventListener("touchstart", this.touch, true);
+    window.addEventListener(BrowserEvent.keyboard, this.keyboard, true);
+    window.addEventListener(BrowserEvent.pointer, this.pointer, true);
+    window.addEventListener(BrowserEvent.touch, this.touch, true);
   }
 
   private disconnect(): void {
     if (!this.connected || typeof window === "undefined") return;
-    window.removeEventListener("keydown", this.keyboard, true);
-    window.removeEventListener("pointerdown", this.pointer, true);
-    window.removeEventListener("touchstart", this.touch, true);
+    window.removeEventListener(BrowserEvent.keyboard, this.keyboard, true);
+    window.removeEventListener(BrowserEvent.pointer, this.pointer, true);
+    window.removeEventListener(BrowserEvent.touch, this.touch, true);
     this.connected = false;
   }
 }

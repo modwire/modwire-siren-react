@@ -24,6 +24,7 @@ import { MuiKeyboardAdapter } from "../shared/keyboard";
 import { MuiInteractionReader } from "../shared/reader";
 import { CommandPaletteItem } from "./palette-item";
 import { PaletteResults } from "./palette-results";
+import { ChildDomIdentityPolicy } from "../runtime/child-identity";
 
 export function CommandPalette({
   tree,
@@ -32,7 +33,11 @@ export function CommandPalette({
   icons,
   theme,
 }: CommandSurfaceProps): ReactNode {
-  const view = useInteractionBinding(tree, locale);
+  const view = useInteractionBinding(
+    tree,
+    locale,
+    ChildDomIdentityPolicy.palette,
+  );
   const reader = useMemo(() => new MuiInteractionReader(tree), [tree]);
   const origin = tree.root.identity.child(SurfaceIdentityRole.paletteTrigger);
   const state = view.snapshot.state;

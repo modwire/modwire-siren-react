@@ -5,10 +5,12 @@ import { useSirenDispatch } from "../../runtime/use-dispatch";
 import { MuiInteractionBinding } from "./binding";
 import { DomFocusAdapter } from "./focus";
 import { MuiInteractionView } from "./view";
+import type { DomIdentityPolicy } from "../../ports/dom-identity";
 
 export function useInteractionBinding(
   tree: InteractionTree,
   locale: string,
+  identities: DomIdentityPolicy,
 ): MuiInteractionView {
   const dispatcher = useSirenDispatch();
   const [binding] = useState(
@@ -24,7 +26,7 @@ export function useInteractionBinding(
     binding.getServerSnapshot,
   );
   useEffect(() => {
-    new DomFocusAdapter().apply(snapshot.focus);
-  }, [snapshot.focus]);
+    new DomFocusAdapter().apply(snapshot.focus, identities);
+  }, [identities, snapshot.focus]);
   return new MuiInteractionView(binding, snapshot);
 }

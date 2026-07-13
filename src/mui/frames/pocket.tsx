@@ -12,16 +12,10 @@ import { FrameHeader } from "./header";
 import { FrameStatus } from "./status";
 import { FrameSurface } from "./surface";
 import { FrameTheme } from "./theme";
-import { InteractionShape } from "../../policy/shape";
 import { PocketNavigation } from "./pocket-navigation";
 
 export function PocketFrame({ options }: FrameProps): React.JSX.Element {
   const view = useFrameView(FrameFamily.pocket, options);
-  const purpose =
-    InteractionShape.from(view.interactions).leaves >
-    options.frames.pocket.maximumDestinations
-      ? SurfacePurpose.contextual
-      : SurfacePurpose.application;
   const persistentNavigation = new PocketNavigationPolicy().compatible(
     view.interactions,
     options.frames.pocket.maximumDestinations,
@@ -45,7 +39,7 @@ export function PocketFrame({ options }: FrameProps): React.JSX.Element {
             <FrameSurface
               label={options.accessibility.navigation}
               placement={InteractionPlacement.navigation}
-              purpose={purpose}
+              purpose={SurfacePurpose.application}
               view={view}
             />
           )}

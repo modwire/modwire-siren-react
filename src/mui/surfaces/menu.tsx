@@ -15,6 +15,7 @@ import { InteractionDomIdentity } from "../runtime/dom-identity";
 import { useInteractionBinding } from "../runtime/use-binding";
 import { CascadingMenu } from "../shared/cascade";
 import { MuiInteractionReader } from "../shared/reader";
+import { StandardDomIdentityPolicy } from "../runtime/standard-identity";
 
 export function CommandMenu({
   tree,
@@ -27,7 +28,11 @@ export function CommandMenu({
   const captureTrigger = useCallback((element: HTMLButtonElement | null) => {
     setTrigger(element);
   }, []);
-  const view = useInteractionBinding(tree, locale);
+  const view = useInteractionBinding(
+    tree,
+    locale,
+    StandardDomIdentityPolicy.instance,
+  );
   const reader = useMemo(() => new MuiInteractionReader(tree), [tree]);
   const origin = tree.root.identity.child(SurfaceIdentityRole.menuTrigger);
   return (

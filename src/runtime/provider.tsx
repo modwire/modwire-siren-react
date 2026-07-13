@@ -15,12 +15,7 @@ export function SirenSessionProvider({
 }: SirenSessionProviderProps): ReactNode {
   const store = useMemo(() => new UiSessionStore(session), [session]);
   const context = useMemo(() => new BoundSessionContext(store), [store]);
-  useEffect(
-    () => () => {
-      store.dispose();
-    },
-    [store],
-  );
+  useEffect(() => store.mount(), [store]);
   return (
     <SirenSessionContext.Provider value={context}>
       {children}

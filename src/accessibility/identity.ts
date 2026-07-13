@@ -3,6 +3,10 @@ import { AccessibilityRole } from "../domain/vocabulary/accessibility-role";
 
 export class AccessibilityIdentityFactory {
   create(identity: InteractionIdentity): string {
-    return `siren-${encodeURIComponent(identity.value)}-${AccessibilityRole.widget}`;
+    return `${this.interaction(identity)}-${AccessibilityRole.widget}`;
+  }
+
+  interaction(identity: InteractionIdentity): string {
+    return `siren-${encodeURIComponent(identity.value)}`;
   }
 }

@@ -9,6 +9,7 @@ class ServerImportVerifier {
       "FrameFamily",
       "ReferenceEquality",
       "SirenApplication",
+      "SirenReactCode",
       "SirenReactError",
       "SirenReactIssue",
       "SirenReactIssues",

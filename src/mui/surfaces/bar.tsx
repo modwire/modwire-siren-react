@@ -8,6 +8,7 @@ import { useInteractionBinding } from "../runtime/use-binding";
 import { MuiBarKeyboardAdapter } from "../shared/bar-keyboard";
 import { MuiInteractionReader } from "../shared/reader";
 import { CommandBarItem } from "./bar-item";
+import { StandardDomIdentityPolicy } from "../runtime/standard-identity";
 
 export function CommandBar({
   tree,
@@ -16,7 +17,11 @@ export function CommandBar({
   icons,
   theme,
 }: CommandSurfaceProps): ReactNode {
-  const view = useInteractionBinding(tree, locale);
+  const view = useInteractionBinding(
+    tree,
+    locale,
+    StandardDomIdentityPolicy.instance,
+  );
   const reader = useMemo(() => new MuiInteractionReader(tree), [tree]);
   const keyboard = new MuiBarKeyboardAdapter(
     view.binding,

@@ -30,6 +30,7 @@ import { MuiInteractionReader } from "../shared/reader";
 import { CommandSheetItem } from "./sheet-item";
 import { SheetScrollMemory } from "./scroll-memory";
 import { SheetScrollAdapter } from "./scroll";
+import { StandardDomIdentityPolicy } from "../runtime/standard-identity";
 
 export function CommandSheet({
   tree,
@@ -38,7 +39,11 @@ export function CommandSheet({
   icons,
   theme,
 }: CommandSurfaceProps): ReactNode {
-  const view = useInteractionBinding(tree, locale);
+  const view = useInteractionBinding(
+    tree,
+    locale,
+    StandardDomIdentityPolicy.instance,
+  );
   const reader = useMemo(() => new MuiInteractionReader(tree), [tree]);
   const origin = tree.root.identity.child(SurfaceIdentityRole.sheetTrigger);
   const group = reader.currentGroup(view.snapshot);

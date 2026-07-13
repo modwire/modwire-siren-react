@@ -20,6 +20,7 @@ import { MuiKeyboardAdapter } from "../shared/keyboard";
 import { MenuItems } from "../shared/menu-items";
 import { MuiInteractionReader } from "../shared/reader";
 import type { ContextMenuAnchor } from "./anchor";
+import { StandardDomIdentityPolicy } from "../runtime/standard-identity";
 import { ClosedContextMenuAnchor } from "./closed-anchor";
 import { OpenContextMenuAnchor } from "./open-anchor";
 
@@ -35,7 +36,11 @@ export function ContextMenu({
   const [anchor, setAnchor] = useState<ContextMenuAnchor>(
     new ClosedContextMenuAnchor(),
   );
-  const view = useInteractionBinding(tree, locale);
+  const view = useInteractionBinding(
+    tree,
+    locale,
+    StandardDomIdentityPolicy.instance,
+  );
   const reader = useMemo(() => new MuiInteractionReader(tree), [tree]);
   const keyboard = new MuiKeyboardAdapter(
     view.binding,

@@ -7,17 +7,14 @@ class PackageVerifier {
     "package/README.md",
     "package/dist/api.d.ts",
     "package/dist/api.js",
-    "package/dist/api.js.map",
     "package/dist/interactions.d.ts",
     "package/dist/interactions.js",
-    "package/dist/interactions.js.map",
     "package/dist/frames.d.ts",
     "package/dist/frames.js",
     "package/dist/widgets.d.ts",
     "package/dist/widgets.js",
     "package/dist/extensions.d.ts",
     "package/dist/extensions.js",
-    "package/dist/extensions.js.map",
     "package/package.json",
   ]);
 
@@ -35,7 +32,12 @@ class PackageVerifier {
     const unexpected = [...actual].filter(
       (path) =>
         !PackageVerifier.expected.has(path) &&
-        !path.startsWith("package/dist/"),
+        (!path.startsWith("package/dist/") ||
+          path.endsWith(".map") ||
+          path.includes("/src/") ||
+          path.includes(".test.") ||
+          path.includes(".spec.") ||
+          path.includes(".stories.")),
     );
     if (missing.length > 0 || unexpected.length > 0) {
       throw new Error(

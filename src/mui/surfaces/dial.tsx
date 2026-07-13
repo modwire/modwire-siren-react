@@ -18,6 +18,7 @@ import { InteractionDomIdentity } from "../runtime/dom-identity";
 import { useInteractionBinding } from "../runtime/use-binding";
 import { InteractionIconSelector } from "../shared/icon-selector";
 import { MuiInteractionReader } from "../shared/reader";
+import { StandardDomIdentityPolicy } from "../runtime/standard-identity";
 
 export function CommandDial({
   tree,
@@ -26,7 +27,11 @@ export function CommandDial({
   icons,
   theme,
 }: CommandSurfaceProps): ReactNode {
-  const view = useInteractionBinding(tree, locale);
+  const view = useInteractionBinding(
+    tree,
+    locale,
+    StandardDomIdentityPolicy.instance,
+  );
   const reader = useMemo(() => new MuiInteractionReader(tree), [tree]);
   if (!InteractionShape.from(tree).dialCompatible) {
     throw new SirenReactError(

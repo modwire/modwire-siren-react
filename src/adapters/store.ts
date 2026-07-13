@@ -13,6 +13,7 @@ export class UiSessionStore {
   private connection: StoreConnection = new InactiveConnection();
   private current: SnapshotInput;
   private disposed = false;
+  private generation = 0;
   readonly dispatcher: UiDispatcher;
 
   constructor(private readonly session: SessionInput) {
@@ -36,6 +37,16 @@ export class UiSessionStore {
       if (this.listeners.size === 0) this.disconnect();
     };
   };
+
+  mount(): () => void {
+    this.generation += 1;
+    const mounted = this.generation;
+    return () => {
+      queueMicrotask(() => {
+        if (mounted === this.generation) this.dispose();
+      });
+    };
+  }
 
   dispose(): void {
     if (this.disposed) return;

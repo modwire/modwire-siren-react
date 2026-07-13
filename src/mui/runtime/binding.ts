@@ -19,6 +19,7 @@ import type { InteractionObserver } from "../../ports/interaction-observer";
 import type { InteractionSubscription } from "../../ports/interaction-subscription";
 import type { RendererObserver } from "../../ports/renderer-observer";
 import { MuiInteractionDefaults } from "./defaults";
+import { RendererReporter } from "../../errors/reporter";
 
 export class MuiInteractionBinding implements InteractionObserver {
   private readonly listeners = new Set<() => void>();
@@ -68,8 +69,10 @@ export class MuiInteractionBinding implements InteractionObserver {
   }
 
   send(event: InteractionEvent): void {
-    void this.controller.dispatch(event).catch((error: unknown) => {
-      this.observer.failed(error);
+    void this.controller.dispatch(event).catch(() => {
+      new RendererReporter(this.observer).failure(
+        "Interaction activation failed",
+      );
     });
   }
 

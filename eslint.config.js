@@ -33,6 +33,7 @@ export default defineConfig(
   {
     files: [
       "src/adapters/announcement.ts",
+      "src/adapters/browser-event.ts",
       "src/domain/vocabulary/*.ts",
       "src/errors/code.ts",
     ],

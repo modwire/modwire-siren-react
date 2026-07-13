@@ -2,27 +2,47 @@
 
 React presentation adapter for `@modwire/siren-ui`.
 
-The package is being implemented in approved checkpoints. Stage 1 establishes
-the published package boundary and adapts an explicit `UiSession` to React's
-external-store protocol. Stage 2 adds the immutable interaction grammar and a
-deterministic projection from public UI snapshots. Stage 3 adds the
-presentation-independent behavior controller and explicit surface, density,
-hover, and typeahead policies. Stage 4 adds the seven Material UI interaction
-presenters, a local icon allowlist, and constrained semantic theming. Widgets
-and frames are not yet implemented.
+It renders immutable UI session snapshots as accessible React interfaces and
+turns browser interaction back into published UI commands. The package provides
+complete frames, interchangeable hierarchical command surfaces, semantic
+widgets, and local extension registries without exposing raw Material UI
+mechanics.
 
 See [IMPLEMENTATION.md](./IMPLEMENTATION.md) for the binding implementation
 contract.
 
 ## Public API
 
-- `SirenSessionProvider`
-- `useSirenSnapshot`
-- `useSirenSelector`
-- `useSirenDispatch`
-- `UiDispatcher`
-- selector and equality contracts
-- stable configuration errors
+```tsx
+import {
+  FrameFamily,
+  SirenApplication,
+  StandardSirenReactOptions,
+  type SessionInput,
+} from "@modwire/siren-react";
+
+const options = new StandardSirenReactOptions().create();
+
+interface ApplicationProps {
+  readonly session: SessionInput;
+}
+
+export function Application({ session }: ApplicationProps) {
+  return (
+    <SirenApplication
+      frame={FrameFamily.workbench}
+      options={options}
+      session={session}
+    />
+  );
+}
+```
+
+The root entrance exposes the application facade, explicit session provider,
+external-store hooks, complete options, frame vocabulary, and stable errors.
+
+`@modwire/siren-react/frames` exposes `WorkbenchFrame`, `FocusFrame`,
+`FlowFrame`, `PocketFrame`, and their immutable configuration contracts.
 
 The `@modwire/siren-react/interactions` entrance exposes immutable interaction
 observation values: the tree and node composite, identities, accessible names,
@@ -34,11 +54,15 @@ The interaction entrance provides `CommandMenu`, `CommandBar`, `CommandRail`,
 consumes the same immutable interaction tree and requires an explicit icon
 registry and semantic theme.
 
-The `@modwire/siren-react/extensions` entrance exposes immutable surface and
-density policy contracts. Policies select presentation semantics from complete
-context without rendering or browser access. It also exposes icon registry
-construction and constrained theme values without exposing raw Material UI props
-or `sx` mechanics.
+`@modwire/siren-react/widgets` exposes semantic document, region, property,
+relation, action, field, progress, diagnostic, confirmation, acknowledgement,
+and unsupported renderers with their local observation contracts.
+
+`@modwire/siren-react/extensions` exposes local widget and icon registries,
+surface and density strategies, viewport and modality adapters, navigation and
+observer ports, accessibility policy, and constrained theme values. It does not
+expose raw Material UI props, generic layout primitives, or dynamic component
+loading.
 
 ## Development
 

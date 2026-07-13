@@ -11,6 +11,8 @@ import { CommandMenu } from "../surfaces/menu";
 import { CommandPalette } from "../surfaces/palette";
 import { CommandRail } from "../surfaces/rail";
 import { CommandSheet } from "../surfaces/sheet";
+import { SirenReactCode } from "../../errors/code";
+import { SirenReactError } from "../../errors/error";
 
 export interface FrameSurfaceProps {
   readonly view: FrameView;
@@ -40,5 +42,9 @@ export function FrameSurface({
   }
   if (surface === InteractionSurface.sheet) return <CommandSheet {...props} />;
   if (surface === InteractionSurface.dial) return <CommandDial {...props} />;
-  return <CommandMenu {...props} />;
+  if (surface === InteractionSurface.menu) return <CommandMenu {...props} />;
+  throw new SirenReactError(
+    SirenReactCode.interactionSurface,
+    "Selected interaction surface requires a semantic target",
+  );
 }

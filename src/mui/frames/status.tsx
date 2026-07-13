@@ -2,6 +2,7 @@ import Alert from "@mui/material/Alert";
 import Box from "@mui/material/Box";
 
 import type { FrameView } from "../../frames/view";
+import { DiagnosticSeverity } from "../../domain/vocabulary/diagnostic-severity";
 
 export interface FrameStatusProps {
   readonly view: FrameView;
@@ -17,7 +18,9 @@ export function FrameStatus({ view }: FrameStatusProps): React.JSX.Element {
       {view.presentation.announcement === "" ? (
         <span aria-hidden />
       ) : (
-        <Alert severity="info">{view.presentation.announcement}</Alert>
+        <Alert severity={DiagnosticSeverity.info}>
+          {view.presentation.announcement}
+        </Alert>
       )}
     </Box>
   );

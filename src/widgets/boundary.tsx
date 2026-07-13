@@ -1,7 +1,6 @@
 import { Component, type ReactNode } from "react";
 
-import { SirenReactCode } from "../errors/code";
-import { SirenReactError } from "../errors/error";
+import { RendererReporter } from "../errors/reporter";
 import type { RendererObserver } from "../ports/renderer-observer";
 
 export interface WidgetBoundaryProps {
@@ -26,16 +25,7 @@ export class WidgetBoundary extends Component<
   }
 
   override componentDidCatch(): void {
-    try {
-      this.props.observer.failed(
-        new SirenReactError(
-          SirenReactCode.rendererFailure,
-          "Widget renderer failed",
-        ),
-      );
-    } catch {
-      // Observer failures must not escape the renderer boundary.
-    }
+    new RendererReporter(this.props.observer).failure("Widget renderer failed");
   }
 
   override componentDidUpdate(previous: WidgetBoundaryProps): void {

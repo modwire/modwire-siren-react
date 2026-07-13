@@ -6,6 +6,7 @@ import type { IconRegistration } from "./registration";
 import type { RendererObserver } from "../../ports/renderer-observer";
 import { SirenReactCode } from "../../errors/code";
 import { SirenReactError } from "../../errors/error";
+import { RendererReporter } from "../../errors/reporter";
 
 export class LocalIconRegistry implements IconRegistry {
   private readonly registrations: readonly IconRegistration[];
@@ -31,7 +32,7 @@ export class LocalIconRegistry implements IconRegistry {
     }
     if (!this.reported.has(key)) {
       this.reported.add(key);
-      this.observer.failed(
+      new RendererReporter(this.observer).report(
         new SirenReactError(
           SirenReactCode.iconUnknown,
           `Icon is not registered: '${key}'`,

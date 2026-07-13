@@ -7,6 +7,7 @@ import type { WidgetAction } from "../domain/widgets/action";
 import type { WidgetField } from "../domain/widgets/field";
 import type { WidgetRelation } from "../domain/widgets/relation";
 import type { WidgetContext } from "./context";
+import { RendererReporter } from "../errors/reporter";
 
 export class WidgetActivation {
   constructor(private readonly context: WidgetContext) {}
@@ -34,12 +35,10 @@ export class WidgetActivation {
   private activate(
     intent: Parameters<WidgetContext["activator"]["activate"]>[0],
   ): void {
-    void this.context.activator.activate(intent).catch((error: unknown) => {
-      try {
-        this.context.observer.failed(error);
-      } catch {
-        // Observer failures cannot escape an activation boundary.
-      }
+    void this.context.activator.activate(intent).catch(() => {
+      new RendererReporter(this.context.observer).failure(
+        "Widget activation failed",
+      );
     });
   }
 }

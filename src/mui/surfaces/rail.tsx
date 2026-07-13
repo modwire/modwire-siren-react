@@ -10,6 +10,7 @@ import { useInteractionBinding } from "../runtime/use-binding";
 import { MuiInteractionReader } from "../shared/reader";
 import { MuiKeyboardAdapter } from "../shared/keyboard";
 import { CommandRailItem } from "./rail-item";
+import { StandardDomIdentityPolicy } from "../runtime/standard-identity";
 
 export function CommandRail({
   tree,
@@ -18,7 +19,11 @@ export function CommandRail({
   icons,
   theme,
 }: CommandSurfaceProps): ReactNode {
-  const view = useInteractionBinding(tree, locale);
+  const view = useInteractionBinding(
+    tree,
+    locale,
+    StandardDomIdentityPolicy.instance,
+  );
   const reader = useMemo(() => new MuiInteractionReader(tree), [tree]);
   const keyboard = new MuiKeyboardAdapter(
     view.binding,
