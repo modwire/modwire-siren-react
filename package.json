@@ -1,0 +1,82 @@
+{
+  "name": "@modwire/siren-react",
+  "version": "0.1.0",
+  "description": "React presentation adapter for the Modwire Siren UI engine.",
+  "license": "MIT",
+  "packageManager": "npm@11.11.0",
+  "author": {
+    "name": "Tomasz Szpak",
+    "url": "https://szpak.dev"
+  },
+  "type": "module",
+  "sideEffects": false,
+  "engines": {
+    "node": ">=22.14.0"
+  },
+  "files": [
+    "dist",
+    "IMPLEMENTATION.md",
+    "LICENSE",
+    "README.md"
+  ],
+  "main": "./dist/api.js",
+  "types": "./dist/api.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/api.d.ts",
+      "import": "./dist/api.js"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/modwire/modwire-siren-react.git"
+  },
+  "bugs": {
+    "url": "https://github.com/modwire/modwire-siren-react/issues"
+  },
+  "homepage": "https://github.com/modwire/modwire-siren-react#readme",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@modwire/siren-ui": "0.1.0",
+    "use-sync-external-store": "1.6.0"
+  },
+  "peerDependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@mui/icons-material": "^7.3.11",
+    "@mui/material": "^7.3.11",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "scripts": {
+    "build": "tsdown src/public/api.ts --format esm --platform neutral --dts --clean --sourcemap --target es2022",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "eslint .",
+    "package:check": "npm run build && publint && attw --pack . --profile esm-only && tsx scripts/verify-package.ts",
+    "ssr:check": "npm run build && tsx scripts/verify-ssr.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "verify": "npm run build && npm run format:check && npm run lint && npm run typecheck && tsx scripts/verify-lock.ts && npm run ssr:check && npm run package:check"
+  },
+  "devDependencies": {
+    "@arethetypeswrong/cli": "0.18.5",
+    "@eslint/js": "10.0.1",
+    "@types/node": "22.20.1",
+    "@types/react": "19.2.17",
+    "@types/react-dom": "19.2.3",
+    "@types/use-sync-external-store": "1.5.0",
+    "eslint": "10.7.0",
+    "eslint-plugin-react-hooks": "7.1.1",
+    "globals": "17.7.0",
+    "prettier": "3.9.5",
+    "publint": "0.3.21",
+    "react": "19.2.7",
+    "react-dom": "19.2.7",
+    "tsx": "4.23.0",
+    "tsdown": "0.22.5",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.63.0"
+  }
+}
