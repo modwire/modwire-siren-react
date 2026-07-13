@@ -6,6 +6,7 @@ import type { ReactNode } from "react";
 import type { InteractionNode } from "../../domain/interactions/base";
 import type { InteractionIdentity } from "../../domain/interactions/identity";
 import { InputModality } from "../../domain/vocabulary/modality";
+import { SurfaceIdentityRole } from "../../domain/vocabulary/surface-role";
 import type { IconRegistry } from "../../ports/icon-registry";
 import type { MuiInteractionBinding } from "../runtime/binding";
 import { InteractionDomIdentity } from "../runtime/dom-identity";
@@ -32,7 +33,9 @@ export function CommandPaletteItem({
     reader.active(binding.getSnapshot()).value === node.identity.value;
   return (
     <ListItemButton
-      id={InteractionDomIdentity.from(node.identity)}
+      id={InteractionDomIdentity.from(
+        node.identity.child(SurfaceIdentityRole.paletteResult),
+      )}
       role="option"
       aria-selected={selected}
       disabled={!node.availability.activatable}

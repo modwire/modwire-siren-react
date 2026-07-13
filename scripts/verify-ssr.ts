@@ -6,16 +6,31 @@ class ServerImportVerifier {
     const module: unknown = await import(pathToFileURL("dist/api.js").href);
     assert.ok(module && typeof module === "object");
     assert.deepEqual(Object.keys(module as Record<string, unknown>).sort(), [
+      "FrameFamily",
       "ReferenceEquality",
+      "SirenApplication",
       "SirenReactError",
       "SirenReactIssue",
       "SirenReactIssues",
+      "SirenReactOptions",
       "SirenSessionProvider",
+      "StandardSirenReactOptions",
       "UiDispatcher",
       "useSirenDispatch",
       "useSirenSelector",
       "useSirenSnapshot",
     ]);
+
+    const frames: unknown = await import(pathToFileURL("dist/frames.js").href);
+    assert.ok(frames && typeof frames === "object");
+    for (const frame of [
+      "FlowFrame",
+      "FocusFrame",
+      "PocketFrame",
+      "WorkbenchFrame",
+    ]) {
+      assert.ok(Object.hasOwn(frames, frame));
+    }
 
     const interactions: unknown = await import(
       pathToFileURL("dist/interactions.js").href

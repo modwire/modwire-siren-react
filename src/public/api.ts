@@ -1,4 +1,11 @@
 export { UiDispatcher } from "../adapters/dispatcher";
+export { FrameFamily } from "../domain/vocabulary/frame";
+export {
+  SirenApplication,
+  type SirenApplicationProps,
+} from "../runtime/application";
+export { SirenReactOptions } from "../runtime/options";
+export { StandardSirenReactOptions } from "../runtime/standard-options";
 export type { SessionInput } from "../adapters/session";
 export type { SnapshotInput } from "../adapters/snapshot";
 export type { SirenEquality } from "../domain/equality";

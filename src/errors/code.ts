@@ -24,4 +24,5 @@ export class SirenReactCode {
   static readonly widgetDuplicate = "widget.duplicate";
   static readonly widgetUnknown = "widget.unknown";
   static readonly rendererFailure = "renderer.failure";
+  static readonly optionsInvalid = "options.invalid";
 }

@@ -5,4 +5,6 @@ export class SurfaceIdentityRole {
   static readonly dialTrigger = "dial-trigger";
   static readonly contextSurface = "context-surface";
   static readonly menuSurface = "menu-surface";
+  static readonly pocketNavigation = "pocket-navigation";
+  static readonly paletteResult = "palette-result";
 }
