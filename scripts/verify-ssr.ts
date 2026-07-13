@@ -41,6 +41,27 @@ class ServerImportVerifier {
     assert.ok(Object.hasOwn(extensions, "StandardSurfacePolicy"));
     assert.ok(Object.hasOwn(extensions, "StandardIconRegistry"));
     assert.ok(Object.hasOwn(extensions, "StandardSirenTheme"));
+    assert.ok(Object.hasOwn(extensions, "StandardWidgetRegistry"));
+
+    const widgets: unknown = await import(
+      pathToFileURL("dist/widgets.js").href
+    );
+    assert.ok(widgets && typeof widgets === "object");
+    for (const widget of [
+      "AcknowledgementWidget",
+      "ActionWidget",
+      "ConfirmationWidget",
+      "DiagnosticWidget",
+      "DocumentWidget",
+      "FieldWidget",
+      "ProgressWidget",
+      "PropertyWidget",
+      "RegionWidget",
+      "RelationWidget",
+      "UnsupportedWidget",
+    ]) {
+      assert.ok(Object.hasOwn(widgets, widget));
+    }
   }
 }
 

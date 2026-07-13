@@ -1,6 +1,7 @@
 import { InteractionCollection } from "../interactions/collection";
 import type { PresentationDiagnostic } from "./diagnostic";
 import type { PresentationGroup } from "./group";
+import type { WidgetDocument } from "../widgets/document";
 
 export class PresentationSnapshot {
   readonly diagnostics: InteractionCollection<PresentationDiagnostic>;
@@ -8,6 +9,7 @@ export class PresentationSnapshot {
   constructor(
     readonly revision: number,
     readonly root: PresentationGroup,
+    readonly document: WidgetDocument,
     readonly focus: string,
     readonly announcement: string,
     diagnostics: readonly PresentationDiagnostic[],

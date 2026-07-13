@@ -19,4 +19,9 @@ export class SirenReactCode {
   static readonly interactionDuplicate = "interaction.duplicate";
   static readonly interactionTree = "interaction.tree";
   static readonly interactionValue = "interaction.value";
+  static readonly widgetComponent = "widget.component";
+  static readonly widgetValue = "widget.value";
+  static readonly widgetDuplicate = "widget.duplicate";
+  static readonly widgetUnknown = "widget.unknown";
+  static readonly rendererFailure = "renderer.failure";
 }

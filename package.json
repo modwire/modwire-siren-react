@@ -30,6 +30,10 @@
       "types": "./dist/interactions.d.ts",
       "import": "./dist/interactions.js"
     },
+    "./widgets": {
+      "types": "./dist/widgets.d.ts",
+      "import": "./dist/widgets.js"
+    },
     "./extensions": {
       "types": "./dist/extensions.d.ts",
       "import": "./dist/extensions.js"
@@ -59,7 +63,7 @@
     "react-dom": "^19.0.0"
   },
   "scripts": {
-    "build": "tsdown src/public/api.ts src/public/interactions.ts src/public/extensions.ts --format esm --platform neutral --dts --clean --sourcemap --target es2022",
+    "build": "tsdown src/public/api.ts src/public/interactions.ts src/public/widgets.ts src/public/extensions.ts --format esm --platform neutral --dts --clean --sourcemap --target es2022",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "eslint .",

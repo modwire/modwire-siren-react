@@ -31,7 +31,11 @@ export default defineConfig(
     },
   },
   {
-    files: ["src/domain/vocabulary/*.ts", "src/errors/code.ts"],
+    files: [
+      "src/adapters/announcement.ts",
+      "src/domain/vocabulary/*.ts",
+      "src/errors/code.ts",
+    ],
     rules: {
       "@typescript-eslint/no-extraneous-class": "off",
     },
