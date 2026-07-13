@@ -4,6 +4,8 @@ export type { SnapshotInput } from "../adapters/snapshot";
 export type { SirenEquality } from "../domain/equality";
 export type { SirenSelector } from "../domain/selector";
 export { SirenReactError } from "../errors/error";
+export { SirenReactIssue } from "../errors/issue";
+export { SirenReactIssues } from "../errors/issues";
 export { ReferenceEquality } from "../policy/reference";
 export {
   SirenSessionProvider,

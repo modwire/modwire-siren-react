@@ -8,12 +8,20 @@ class ServerImportVerifier {
     assert.deepEqual(Object.keys(module as Record<string, unknown>).sort(), [
       "ReferenceEquality",
       "SirenReactError",
+      "SirenReactIssue",
+      "SirenReactIssues",
       "SirenSessionProvider",
       "UiDispatcher",
       "useSirenDispatch",
       "useSirenSelector",
       "useSirenSnapshot",
     ]);
+
+    const interactions: unknown = await import(
+      pathToFileURL("dist/interactions.js").href
+    );
+    assert.ok(interactions && typeof interactions === "object");
+    assert.ok(Object.hasOwn(interactions, "InteractionTree"));
   }
 }
 

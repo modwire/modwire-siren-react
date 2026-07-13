@@ -8,6 +8,9 @@ class PackageVerifier {
     "package/dist/api.d.ts",
     "package/dist/api.js",
     "package/dist/api.js.map",
+    "package/dist/interactions.d.ts",
+    "package/dist/interactions.js",
+    "package/dist/interactions.js.map",
     "package/package.json",
   ]);
 
