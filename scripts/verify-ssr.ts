@@ -22,12 +22,25 @@ class ServerImportVerifier {
     );
     assert.ok(interactions && typeof interactions === "object");
     assert.ok(Object.hasOwn(interactions, "InteractionTree"));
+    for (const surface of [
+      "CommandBar",
+      "CommandDial",
+      "CommandMenu",
+      "CommandPalette",
+      "CommandRail",
+      "CommandSheet",
+      "ContextMenu",
+    ]) {
+      assert.ok(Object.hasOwn(interactions, surface));
+    }
 
     const extensions: unknown = await import(
       pathToFileURL("dist/extensions.js").href
     );
     assert.ok(extensions && typeof extensions === "object");
     assert.ok(Object.hasOwn(extensions, "StandardSurfacePolicy"));
+    assert.ok(Object.hasOwn(extensions, "StandardIconRegistry"));
+    assert.ok(Object.hasOwn(extensions, "StandardSirenTheme"));
   }
 }
 

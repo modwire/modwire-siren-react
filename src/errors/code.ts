@@ -13,6 +13,9 @@ export class SirenReactCode {
   static readonly interactionSurface = "interaction.surface";
   static readonly interactionTiming = "interaction.timing";
   static readonly controllerDisposed = "controller.disposed";
+  static readonly themeValue = "theme.value";
+  static readonly iconDuplicate = "icon.duplicate";
+  static readonly iconUnknown = "icon.unknown";
   static readonly interactionDuplicate = "interaction.duplicate";
   static readonly interactionTree = "interaction.tree";
   static readonly interactionValue = "interaction.value";

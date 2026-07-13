@@ -76,6 +76,7 @@ export class InteractionIndex {
     for (const record of this.records) {
       if (
         !(record.node instanceof InteractionDivider) &&
+        !(record.node instanceof InteractionGroup) &&
         record.node !== this.tree.root &&
         matcher.matches(record.node.name.value, query)
       ) {

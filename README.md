@@ -7,8 +7,9 @@ the published package boundary and adapts an explicit `UiSession` to React's
 external-store protocol. Stage 2 adds the immutable interaction grammar and a
 deterministic projection from public UI snapshots. Stage 3 adds the
 presentation-independent behavior controller and explicit surface, density,
-hover, and typeahead policies. Interaction surfaces, widgets, Material UI
-presenters, and frames are not yet implemented.
+hover, and typeahead policies. Stage 4 adds the seven Material UI interaction
+presenters, a local icon allowlist, and constrained semantic theming. Widgets
+and frames are not yet implemented.
 
 See [IMPLEMENTATION.md](./IMPLEMENTATION.md) for the binding implementation
 contract.
@@ -28,9 +29,16 @@ observation values: the tree and node composite, identities, accessible names,
 availability, icon and shortcut values, placements, and semantic intents. It
 does not expose controller mutation.
 
+The interaction entrance provides `CommandMenu`, `CommandBar`, `CommandRail`,
+`CommandPalette`, `CommandSheet`, `CommandDial`, and `ContextMenu`. Each
+consumes the same immutable interaction tree and requires an explicit icon
+registry and semantic theme.
+
 The `@modwire/siren-react/extensions` entrance exposes immutable surface and
 density policy contracts. Policies select presentation semantics from complete
-context without rendering or browser access.
+context without rendering or browser access. It also exposes icon registry
+construction and constrained theme values without exposing raw Material UI props
+or `sx` mechanics.
 
 ## Development
 

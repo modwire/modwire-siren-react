@@ -37,11 +37,21 @@ export default defineConfig(
     },
   },
   {
+    files: ["src/mui/runtime/dom-identity.ts", "src/mui/shared/keys.ts"],
+    rules: {
+      "@typescript-eslint/no-extraneous-class": "off",
+    },
+  },
+  {
     files: ["src/**/*.ts", "src/**/*.tsx"],
     ignores: [
       "src/adapters/**/*.ts",
+      "src/mui/**/*.ts",
+      "src/mui/**/*.tsx",
       "src/public/**/*.ts",
       "src/public/**/*.tsx",
+      "src/theme/**/*.ts",
+      "src/theme/**/*.tsx",
     ],
     rules: {
       "no-restricted-imports": [
