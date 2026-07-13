@@ -14,7 +14,6 @@ import { InputModality } from "../../domain/vocabulary/modality";
 import type { ContextMenuProps } from "../../ports/context-menu-props";
 import { SirenThemeProvider } from "../../theme/provider";
 import { useInteractionBinding } from "../runtime/use-binding";
-import { InteractionDomIdentity } from "../runtime/dom-identity";
 import { BrowserKey } from "../shared/keys";
 import { MuiKeyboardAdapter } from "../shared/keyboard";
 import { MenuItems } from "../shared/menu-items";
@@ -76,7 +75,7 @@ export function ContextMenu({
   return (
     <SirenThemeProvider theme={theme}>
       <span
-        id={InteractionDomIdentity.from(target)}
+        id={view.binding.identities.interaction(target)}
         tabIndex={0}
         onContextMenu={pointer}
         onKeyDown={key}
@@ -84,7 +83,7 @@ export function ContextMenu({
         {children}
       </span>
       <Menu
-        id={InteractionDomIdentity.from(
+        id={view.binding.identities.interaction(
           tree.root.identity.child(SurfaceIdentityRole.contextSurface),
         )}
         anchorReference="anchorPosition"

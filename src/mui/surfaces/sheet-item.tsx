@@ -10,7 +10,6 @@ import { InputModality } from "../../domain/vocabulary/modality";
 import type { InteractionIdentity } from "../../domain/interactions/identity";
 import type { IconRegistry } from "../../ports/icon-registry";
 import type { MuiInteractionBinding } from "../runtime/binding";
-import { InteractionDomIdentity } from "../runtime/dom-identity";
 import { InteractionIconSelector } from "../shared/icon-selector";
 import type { MuiInteractionReader } from "../shared/reader";
 
@@ -32,7 +31,7 @@ export function CommandSheetItem({
   const group = node instanceof InteractionGroup;
   return (
     <ListItemButton
-      id={InteractionDomIdentity.from(node.identity)}
+      id={binding.identities.interaction(node.identity)}
       disabled={!group && !node.availability.activatable}
       selected={
         reader.active(binding.getSnapshot()).value === node.identity.value

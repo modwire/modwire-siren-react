@@ -8,7 +8,6 @@ import type { InteractionIdentity } from "../../domain/interactions/identity";
 import { InputModality } from "../../domain/vocabulary/modality";
 import type { IconRegistry } from "../../ports/icon-registry";
 import type { MuiInteractionBinding } from "../runtime/binding";
-import { ChildDomIdentityPolicy } from "../runtime/child-identity";
 import { InteractionIconSelector } from "../shared/icon-selector";
 import type { MuiInteractionReader } from "../shared/reader";
 import { ShortcutLabel } from "../shared/shortcut";
@@ -32,7 +31,7 @@ export function CommandPaletteItem({
     reader.active(binding.getSnapshot()).value === node.identity.value;
   return (
     <ListItemButton
-      id={ChildDomIdentityPolicy.palette.create(node.identity)}
+      id={binding.focusIdentities.create(node.identity)}
       role="option"
       aria-selected={selected}
       disabled={!node.availability.activatable}

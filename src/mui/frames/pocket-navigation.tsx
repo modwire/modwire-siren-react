@@ -7,7 +7,6 @@ import type { FrameView } from "../../frames/view";
 import { useInteractionBinding } from "../runtime/use-binding";
 import { InteractionIconSelector } from "../shared/icon-selector";
 import { StandardDomIdentityPolicy } from "../runtime/standard-identity";
-import { InteractionDomIdentity } from "../runtime/dom-identity";
 
 export interface PocketNavigationProps {
   readonly view: FrameView;
@@ -39,7 +38,7 @@ export function PocketNavigation({
             new InteractionIconSelector().select(node),
           )}
           key={node.identity.value}
-          id={InteractionDomIdentity.from(node.identity)}
+          id={binding.identities.interaction(node.identity)}
           label={node.name.value}
           onClick={() => {
             binding.activate(origin, node.identity);

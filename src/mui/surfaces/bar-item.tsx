@@ -11,7 +11,6 @@ import type { LayoutDirection } from "../../domain/vocabulary/directionality";
 import { InputModality } from "../../domain/vocabulary/modality";
 import { SurfaceIdentityRole } from "../../domain/vocabulary/surface-role";
 import type { MuiInteractionBinding } from "../runtime/binding";
-import { InteractionDomIdentity } from "../runtime/dom-identity";
 import { CascadingMenu } from "../shared/cascade";
 import { ExpandableAttributes } from "../shared/expandable";
 import { InteractionIconSelector } from "../shared/icon-selector";
@@ -44,13 +43,13 @@ export function CommandBarItem({
       <Tooltip title={node.name.value}>
         <IconButton
           ref={captureAnchor}
-          id={InteractionDomIdentity.from(node.identity)}
+          id={binding.identities.interaction(node.identity)}
           role="menuitem"
           aria-label={node.name.value}
           {...new ExpandableAttributes().for(
             group,
             expanded,
-            InteractionDomIdentity.from(
+            binding.identities.interaction(
               node.identity.child(SurfaceIdentityRole.menuSurface),
             ),
           )}

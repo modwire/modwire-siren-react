@@ -73,8 +73,9 @@
     "lint": "eslint .",
     "package:check": "npm run build && publint && attw --pack . --profile esm-only && tsx scripts/verify-package.ts",
     "ssr:check": "npm run build && tsx scripts/verify-ssr.ts",
+    "test": "npm run build && vitest run",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "verify": "npm run build && npm run format:check && npm run lint && npm run typecheck && tsx scripts/verify-lock.ts && npm run ssr:check && npm run package:check"
+    "verify": "npm run build && npm run format:check && npm run lint && npm run typecheck && tsx scripts/verify-lock.ts && npm run test && npm run ssr:check && npm run package:check"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "0.18.5",
@@ -83,6 +84,9 @@
     "@eslint/js": "10.0.1",
     "@mui/icons-material": "7.3.11",
     "@mui/material": "7.3.11",
+    "@modwire/siren-client": "0.1.0",
+    "@testing-library/react": "16.3.2",
+    "@testing-library/user-event": "14.6.1",
     "@types/node": "22.20.1",
     "@types/react": "19.2.17",
     "@types/react-dom": "19.2.3",
@@ -90,6 +94,7 @@
     "eslint": "10.7.0",
     "eslint-plugin-react-hooks": "7.1.1",
     "globals": "17.7.0",
+    "jsdom": "29.1.1",
     "prettier": "3.9.5",
     "publint": "0.3.21",
     "react": "19.2.7",
@@ -97,6 +102,7 @@
     "tsdown": "0.22.5",
     "tsx": "4.23.0",
     "typescript": "6.0.3",
-    "typescript-eslint": "8.63.0"
+    "typescript-eslint": "8.63.0",
+    "vitest": "4.1.10"
   }
 }

@@ -23,7 +23,6 @@ import { InputModality } from "../../domain/vocabulary/modality";
 import { SurfaceIdentityRole } from "../../domain/vocabulary/surface-role";
 import type { CommandSurfaceProps } from "../../ports/surface-props";
 import { SirenThemeProvider } from "../../theme/provider";
-import { InteractionDomIdentity } from "../runtime/dom-identity";
 import { useInteractionBinding } from "../runtime/use-binding";
 import { MuiKeyboardAdapter } from "../shared/keyboard";
 import { MuiInteractionReader } from "../shared/reader";
@@ -69,7 +68,7 @@ export function CommandSheet({
     <SirenThemeProvider theme={theme}>
       <Tooltip title={label}>
         <IconButton
-          id={InteractionDomIdentity.from(origin)}
+          id={view.binding.identities.interaction(origin)}
           aria-label={label}
           aria-haspopup="dialog"
           aria-expanded={reader.isOpen(view.snapshot)}

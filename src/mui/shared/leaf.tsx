@@ -8,7 +8,6 @@ import type { InteractionIdentity } from "../../domain/interactions/identity";
 import { InputModality } from "../../domain/vocabulary/modality";
 import type { IconRegistry } from "../../ports/icon-registry";
 import type { MuiInteractionBinding } from "../runtime/binding";
-import { InteractionDomIdentity } from "../runtime/dom-identity";
 import { InteractionIconSelector } from "./icon-selector";
 import type { MuiInteractionReader } from "./reader";
 import { MenuItemSemantics } from "./role";
@@ -32,7 +31,7 @@ export function MenuLeaf({
   const semantics = new MenuItemSemantics();
   return (
     <MenuItem
-      id={InteractionDomIdentity.from(node.identity)}
+      id={binding.identities.interaction(node.identity)}
       {...semantics.attributes(node)}
       disabled={!node.availability.activatable}
       selected={

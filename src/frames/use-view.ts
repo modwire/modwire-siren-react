@@ -1,6 +1,5 @@
 import { useMemo, useSyncExternalStore } from "react";
 
-import { AccessibilityIdentityFactory } from "../accessibility/identity";
 import { UiInteractionActivator } from "../adapters/activation";
 import { CommandFactory } from "../adapters/command";
 import { SnapshotAdapter } from "../adapters/projection";
@@ -10,6 +9,7 @@ import { DensityContext } from "../policy/density-context";
 import type { SirenReactOptions } from "../runtime/options";
 import { useSirenDispatch } from "../runtime/use-dispatch";
 import { useSirenSnapshot } from "../runtime/use-snapshot";
+import { useSirenIdentities } from "../runtime/use-identities";
 import { WidgetContext } from "../widgets/context";
 import { FrameView } from "./view";
 
@@ -19,6 +19,7 @@ export function useFrameView(
 ): FrameView {
   const snapshot = useSirenSnapshot();
   const dispatcher = useSirenDispatch();
+  const identities = useSirenIdentities();
   const viewport = useSyncExternalStore(
     options.viewport.subscribe,
     options.viewport.getSnapshot,
@@ -50,13 +51,13 @@ export function useFrameView(
         presentation.document,
         presentation,
         density,
-        new AccessibilityIdentityFactory(),
+        identities,
         activator,
         options.icons,
         options.widgets,
         options.observer,
       ),
-    [activator, density, options, presentation],
+    [activator, density, identities, options, presentation],
   );
   return new FrameView(
     family,

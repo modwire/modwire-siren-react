@@ -18,7 +18,6 @@ import { LayoutDirection } from "../../domain/vocabulary/directionality";
 import { InputModality } from "../../domain/vocabulary/modality";
 import { SurfaceIdentityRole } from "../../domain/vocabulary/surface-role";
 import type { MuiInteractionBinding } from "../runtime/binding";
-import { InteractionDomIdentity } from "../runtime/dom-identity";
 import { InteractionIconSelector } from "./icon-selector";
 import { MuiKeyboardAdapter } from "./keyboard";
 import type { MuiInteractionReader } from "./reader";
@@ -58,9 +57,9 @@ export function NestedMenu({
     <>
       <MenuItem
         ref={captureAnchor}
-        id={InteractionDomIdentity.from(group.identity)}
+        id={binding.identities.interaction(group.identity)}
         aria-haspopup="menu"
-        aria-controls={InteractionDomIdentity.from(
+        aria-controls={binding.identities.interaction(
           group.identity.child(SurfaceIdentityRole.menuSurface),
         )}
         aria-expanded={open}
@@ -89,7 +88,7 @@ export function NestedMenu({
         <ListItemText primary={group.name.value} />
       </MenuItem>
       <Menu
-        id={InteractionDomIdentity.from(
+        id={binding.identities.interaction(
           group.identity.child(SurfaceIdentityRole.menuSurface),
         )}
         anchorEl={anchor}

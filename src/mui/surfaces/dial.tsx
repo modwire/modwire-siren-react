@@ -14,7 +14,6 @@ import { SirenReactError } from "../../errors/error";
 import { InteractionShape } from "../../policy/shape";
 import type { CommandSurfaceProps } from "../../ports/surface-props";
 import { SirenThemeProvider } from "../../theme/provider";
-import { InteractionDomIdentity } from "../runtime/dom-identity";
 import { useInteractionBinding } from "../runtime/use-binding";
 import { InteractionIconSelector } from "../shared/icon-selector";
 import { MuiInteractionReader } from "../shared/reader";
@@ -49,7 +48,7 @@ export function CommandDial({
           new AbsentIcon(),
           new IconReference(StandardIconName.command),
         )}
-        FabProps={{ id: InteractionDomIdentity.from(origin) }}
+        FabProps={{ id: view.binding.identities.interaction(origin) }}
         onPointerDown={() => {
           view.binding.modality(InputModality.pointer);
         }}
@@ -73,7 +72,7 @@ export function CommandDial({
             slotProps={{
               tooltip: { title: node.name.value },
               fab: {
-                id: InteractionDomIdentity.from(node.identity),
+                id: view.binding.identities.interaction(node.identity),
                 disabled: !node.availability.activatable,
                 "aria-label": node.name.value,
               },

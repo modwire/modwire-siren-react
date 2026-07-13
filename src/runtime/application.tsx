@@ -5,6 +5,7 @@ import type { FrameFamily } from "../domain/vocabulary/frame";
 import { FrameRenderer } from "../frames/renderer";
 import type { SirenReactOptions } from "./options";
 import { SirenSessionProvider } from "./provider";
+import { SirenIdentityScope } from "./identity-scope";
 
 export interface SirenApplicationProps {
   readonly session: SessionInput;
@@ -18,8 +19,10 @@ export function SirenApplication({
   frame,
 }: SirenApplicationProps): ReactNode {
   return (
-    <SirenSessionProvider session={session}>
-      <FrameRenderer family={frame} options={options} />
-    </SirenSessionProvider>
+    <SirenIdentityScope>
+      <SirenSessionProvider session={session}>
+        <FrameRenderer family={frame} options={options} />
+      </SirenSessionProvider>
+    </SirenIdentityScope>
   );
 }

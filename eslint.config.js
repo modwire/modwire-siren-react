@@ -31,6 +31,22 @@ export default defineConfig(
     },
   },
   {
+    files: ["tests/**/*.ts", "tests/**/*.tsx"],
+    rules: {
+      "no-restricted-imports": [
+        "error",
+        {
+          patterns: [
+            "../src/*",
+            "../../src/*",
+            "@modwire/siren-react/dist/*",
+            "@modwire/siren-react/src/*",
+          ],
+        },
+      ],
+    },
+  },
+  {
     files: [
       "src/adapters/announcement.ts",
       "src/adapters/browser-event.ts",
@@ -42,7 +58,7 @@ export default defineConfig(
     },
   },
   {
-    files: ["src/mui/runtime/dom-identity.ts", "src/mui/shared/keys.ts"],
+    files: ["src/mui/shared/keys.ts"],
     rules: {
       "@typescript-eslint/no-extraneous-class": "off",
     },

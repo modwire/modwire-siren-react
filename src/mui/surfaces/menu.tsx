@@ -11,7 +11,6 @@ import { InputModality } from "../../domain/vocabulary/modality";
 import { SurfaceIdentityRole } from "../../domain/vocabulary/surface-role";
 import type { CommandSurfaceProps } from "../../ports/surface-props";
 import { SirenThemeProvider } from "../../theme/provider";
-import { InteractionDomIdentity } from "../runtime/dom-identity";
 import { useInteractionBinding } from "../runtime/use-binding";
 import { CascadingMenu } from "../shared/cascade";
 import { MuiInteractionReader } from "../shared/reader";
@@ -40,10 +39,10 @@ export function CommandMenu({
       <Tooltip title={label}>
         <IconButton
           ref={captureTrigger}
-          id={InteractionDomIdentity.from(origin)}
+          id={view.binding.identities.interaction(origin)}
           aria-label={label}
           aria-haspopup="menu"
-          aria-controls={InteractionDomIdentity.from(
+          aria-controls={view.binding.identities.interaction(
             tree.root.identity.child(SurfaceIdentityRole.menuSurface),
           )}
           aria-expanded={reader.isOpen(view.snapshot)}

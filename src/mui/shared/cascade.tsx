@@ -7,7 +7,6 @@ import type { InteractionIdentity } from "../../domain/interactions/identity";
 import type { IconRegistry } from "../../ports/icon-registry";
 import type { LayoutDirection } from "../../domain/vocabulary/directionality";
 import type { MuiInteractionBinding } from "../runtime/binding";
-import { InteractionDomIdentity } from "../runtime/dom-identity";
 import { SurfaceIdentityRole } from "../../domain/vocabulary/surface-role";
 import { MuiKeyboardAdapter } from "./keyboard";
 import { MenuItems } from "./menu-items";
@@ -40,7 +39,7 @@ export function CascadingMenu({
   );
   return (
     <Menu
-      id={InteractionDomIdentity.from(
+      id={binding.identities.interaction(
         group.identity.child(SurfaceIdentityRole.menuSurface),
       )}
       anchorEl={anchor}

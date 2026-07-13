@@ -28,6 +28,9 @@
     "eslint.config.js",
     "scripts/**/*.ts",
     "src/**/*.ts",
-    "src/**/*.tsx"
+    "src/**/*.tsx",
+    "tests/**/*.ts",
+    "tests/**/*.tsx",
+    "vitest.config.ts"
   ]
 }

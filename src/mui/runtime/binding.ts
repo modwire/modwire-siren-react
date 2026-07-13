@@ -20,6 +20,8 @@ import type { InteractionSubscription } from "../../ports/interaction-subscripti
 import type { RendererObserver } from "../../ports/renderer-observer";
 import { MuiInteractionDefaults } from "./defaults";
 import { RendererReporter } from "../../errors/reporter";
+import type { AccessibilityIdentityFactory } from "../../accessibility/identity";
+import type { DomIdentityPolicy } from "../../ports/dom-identity";
 
 export class MuiInteractionBinding implements InteractionObserver {
   private readonly listeners = new Set<() => void>();
@@ -33,6 +35,8 @@ export class MuiInteractionBinding implements InteractionObserver {
     dispatcher: UiDispatcher,
     tree: InteractionTree,
     locale: string,
+    readonly identities: AccessibilityIdentityFactory,
+    readonly focusIdentities: DomIdentityPolicy,
     private readonly observer: RendererObserver = new SilentRendererObserver(),
   ) {
     const scheduler = new BrowserInteractionScheduler();
