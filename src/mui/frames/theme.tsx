@@ -1,3 +1,4 @@
+import CssBaseline from "@mui/material/CssBaseline";
 import type { ReactNode } from "react";
 
 import type { SirenReactOptions } from "../../runtime/options";
@@ -10,6 +11,9 @@ export interface FrameThemeProps {
 
 export function FrameTheme({ options, children }: FrameThemeProps): ReactNode {
   return (
-    <SirenThemeProvider theme={options.theme}>{children}</SirenThemeProvider>
+    <SirenThemeProvider theme={options.theme}>
+      <CssBaseline enableColorScheme />
+      {children}
+    </SirenThemeProvider>
   );
 }

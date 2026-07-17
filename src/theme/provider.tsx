@@ -14,5 +14,9 @@ export function SirenThemeProvider({
   children,
 }: SirenThemeProviderProps): ReactNode {
   const material = useMemo(() => new MuiThemeFactory().create(theme), [theme]);
-  return <ThemeProvider theme={material}>{children}</ThemeProvider>;
+  return (
+    <ThemeProvider defaultMode="system" theme={material}>
+      {children}
+    </ThemeProvider>
+  );
 }

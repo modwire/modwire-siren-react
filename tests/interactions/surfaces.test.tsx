@@ -130,8 +130,8 @@ describe("interaction surfaces", () => {
     });
     await waitFor(() => {
       expect(screen.queryByRole("menu")).toBeNull();
+      expect(screen.getByRole("button", { name: "Commands" })).toBeTruthy();
     });
-    expect(screen.getByRole("button", { name: "Commands" })).toBeTruthy();
   });
 
   it("rejects a speed dial assigned to a nested tree", () => {

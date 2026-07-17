@@ -4,7 +4,18 @@ import type { SirenTheme } from "./theme";
 
 export class MuiThemeFactory {
   create(tokens: SirenTheme): Theme {
+    const semanticPalette = () => ({
+      error: { main: tokens.colors.failure },
+      primary: { main: tokens.colors.operation },
+      success: { main: tokens.colors.success },
+      warning: { main: tokens.colors.warning },
+    });
     return createTheme({
+      colorSchemes: {
+        dark: { palette: semanticPalette() },
+        light: { palette: semanticPalette() },
+      },
+      cssVariables: true,
       direction: tokens.direction.value,
       shape: { borderRadius: 6 },
       spacing: 4,
@@ -15,12 +26,6 @@ export class MuiThemeFactory {
           short: tokens.motion.standard,
         },
         easing: { easeInOut: tokens.motion.easing },
-      },
-      palette: {
-        primary: { main: tokens.colors.operation },
-        success: { main: tokens.colors.success },
-        warning: { main: tokens.colors.warning },
-        error: { main: tokens.colors.failure },
       },
       components: {
         MuiIconButton: {
