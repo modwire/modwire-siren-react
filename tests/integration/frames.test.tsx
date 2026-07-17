@@ -49,6 +49,23 @@ describe("application frames", () => {
     expect(markup).toContain("Save record");
   });
 
+  it("publishes MUI light and dark color schemes for system adaptation", () => {
+    const opened = new SessionCase().open(new DocumentCase().actionable());
+    render(
+      <SirenApplication
+        frame={FrameFamily.focus}
+        options={new StandardSirenReactOptions().create()}
+        session={opened.session}
+      />,
+    );
+    const rules = Array.from(document.styleSheets)
+      .flatMap((sheet) => Array.from(sheet.cssRules))
+      .map((rule) => rule.cssText)
+      .join("\n");
+    expect(rules).toContain("--mui-palette-background-default");
+    expect(rules).toContain("prefers-color-scheme: dark");
+  });
+
   it("hydrates the server snapshot without replacing the castle", async () => {
     const opened = new SessionCase().open(new DocumentCase().actionable());
     const options = new StandardSirenReactOptions().create();
